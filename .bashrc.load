@@ -17,7 +17,7 @@ export EDITOR="vim"
 source ~/perl5/perlbrew/etc/bashrc
 
 
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec ssh-agent startx
 
 # Alias:
 
