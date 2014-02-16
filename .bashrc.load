@@ -1,0 +1,32 @@
+#!sh
+
+export PATH=${HOME}/local/bin:${PATH}
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+if [ /usr/share/terminfo/x/xterm-256color ]; then
+	export TERM='xterm-256color'
+else
+	export TERM='xterm-color'
+fi
+
+export BROWSER="firefox"
+export EDITOR="vim"
+
+source ~/perl5/perlbrew/etc/bashrc
+
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+# Alias:
+
+alias vi="vim"
+alias ack="ag"
+
+#
+# ~/.bashrc
+#
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
