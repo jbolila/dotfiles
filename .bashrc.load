@@ -1,6 +1,6 @@
 #!sh
 
-export PATH=${HOME}/local/bin:${PATH}
+export PATH=$PATH:$HOME/.rvm/bin:$HOME/local/bin
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -16,17 +16,50 @@ export EDITOR="vim"
 
 source ~/perl5/perlbrew/etc/bashrc
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export rvm_ignore_gemrc_issues=1
+
+# PS1='[\u@\h \W]\$ '
+. $HOME/.git_branch_prompt.sh
+. $HOME/local/bin/z.sh
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec ssh-agent startx
 
 # Alias:
 
-alias vi="vim"
-alias ack="ag"
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-#
-# ~/.bashrc
-#
+# Functions:
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+up () {
+  local perl=$1
+  if [ $perl ]; then
+    perlbrew use $perl@std
+  fi
+  local current=$(perlbrew list | grep \* | sed -e 's/\* //' )
+  echo "Current perl is $current"
+}
+
+function listen {
+  lsof -n -i4TCP:${@:-'8080'} | grep LISTEN
+}
+
+function g {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status --short --branch
+  fi
+  #  git ${@:-'status --short --branch'}
+}
+
+function p {
+  if [[ $# > 0 ]]; then
+    zathura $@
+  else
+    echo 'zathura! what is the pdf to open?'
+  fi
+  #  git ${@:-'status --short --branch'}
+}

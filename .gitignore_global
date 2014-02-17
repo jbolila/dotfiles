@@ -35,3 +35,5 @@ Thumbs.db
 
 .tracker.json
 *.pid
+
+.vim/bundle/
