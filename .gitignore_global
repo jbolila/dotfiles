@@ -1,0 +1,37 @@
+# Direnv stuff
+.direnv
+.envrc
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+# Editor files #
+################
+*~
+*.pyc
+.ropeproject/
+*.egg-info/
+/node_modules
+# ignore any vim files:
+*.swp
+*.swo
+*.sw[a-z]
+.tags
+
+# Sublime Text 2
+*.sublime-project
+*.sublime-workspace
+.tags_sorted_by_file
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+.tracker.json
+*.pid

@@ -1,0 +1,39 @@
+[user]
+  email = joao@bolila.com
+  name = João Bolila
+[core]
+  excludesfile = /home/jbolila/.gitignore_global
+  editor = vim
+  pager = less -R
+  logAllRefUpdates = true
+  # worktree = /
+[alias]
+  ad = add
+  cl = clone
+  ci = commit
+  co = checkout
+  st = status
+  br = branch
+  df = diff
+  dc = diff --cached
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
+  initexternal = !"f() { git --work-tree=. --git-dir=\"$1\" init && echo \"gitdir: $1\" >> .git; }; f"
+  x = !gitx
+  unstage = reset HEAD --
+[push]
+  default = tracking
+[color]
+  ui = true
+[receive]
+  denyDeletes = true
+[gui]
+  fontui = -family \"Lucida Grande\" -size 11 -weight normal -slant roman -und  erline 0 -overstrike 0
+  fontdiff = -family Menlo -size 12 -weight norma l -slant roman -underline 0 -overstrike 0
+[pull]
+  rebase = true
+[branch]
+  autosetupmerge = always
