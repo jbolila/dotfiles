@@ -28,6 +28,4 @@ alias now='perl -M5.010 -e "say time"'
 alias tmux="tmux -2"
 alias mkpass="openssl rand -base64 32"
 
-alias nge='NG_URI="http://admin:admin@10.250.50.181/api/1.0/config/element" perl -I ~/local/lib/ ~/local/bin/nge.pl'
-
 alias update='sudo pacman -Syu; sudo npm update npm -gf; sudo npm update -gf ; gem list `gem list | cut -d " " -f 1`'

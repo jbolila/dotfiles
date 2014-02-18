@@ -29,6 +29,7 @@ Bundle 'mileszs/ack.vim'
 
 Bundle 'vim-scripts/perlhelp.vim'
 Bundle 'rkitover/perl-vim-mxd'
+Bundle 'yko/mojo.vim'
 
 Bundle 'mattn/emmet-vim'
 
@@ -168,7 +169,7 @@ set complete-=i
 " Emmet
 let g:user_emmet_mode='a'    "only enable normal mode functions.
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,html.epl,css EmmetInstall
 
 inoremap <lt>/ </<C-X><C-O>
 inoremap <leader>/ </<C-X><C-O>

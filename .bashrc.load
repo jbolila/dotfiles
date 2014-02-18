@@ -19,6 +19,8 @@ source ~/perl5/perlbrew/etc/bashrc
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export rvm_ignore_gemrc_issues=1
 
+[ -r "$HOME/.smartcd_config" ] && ( [ -n $BASH_VERSION ] || [ -n $ZSH_VERSION ] ) && source ~/.smartcd_config
+
 # PS1='[\u@\h \W]\$ '
 . $HOME/.git_branch_prompt.sh
 . $HOME/local/bin/z.sh
@@ -29,6 +31,10 @@ export rvm_ignore_gemrc_issues=1
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_private ]; then
+    . ~/.bash_private
 fi
 
 # Functions:
