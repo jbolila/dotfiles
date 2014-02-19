@@ -1,0 +1,17 @@
+remove mod1 = Alt_L Alt_R
+! remove mod4 = Super_L
+clear control
+clear shift
+
+! keycode 64 = Alt_L Meta_L
+! keycode 37 = Control_L
+keycode 50 = Escape
+
+! keycode 108 = Alt_R Meta_R
+! keycode 62 = Shift_R
+! keycode 105 = Control_R
+
+add    mod1 = Shift_R
+! add    mod4 = Super_L
+add control = Meta_L Meta_R
+add   shift = Control_L Control_R
