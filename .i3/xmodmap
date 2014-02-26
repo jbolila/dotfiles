@@ -1,5 +1,6 @@
-remove mod1 = Alt_L Alt_R
+! remove mod1 = Alt_L Alt_R
 ! remove mod4 = Super_L
+clear mod1
 clear control
 clear shift
 
@@ -14,4 +15,4 @@ keycode 50 = Escape
 add    mod1 = Shift_R
 ! add    mod4 = Super_L
 add control = Meta_L Meta_R
-add   shift = Control_L Control_R
+add shift = Control_L Control_R
