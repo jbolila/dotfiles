@@ -124,7 +124,7 @@ endsnippet
 
 
 snippet dump "Dumper tidy"
-use Data::Dump qw(dump); say "[DEBUG START] #`whoami` - `date '+%Y.%m.%d %H:%M' `\n" . dump( ${0:${VISUAL}}) . '[DEBUG END]';
+eval { require Data::Dumper; print STDERR "[DEBUG START] #`whoami` - `date '+%Y.%m.%d %H:%M' `\n" . Data::Dumper::Dumper( ${0:${VISUAL}}) . '[DEBUG END]'; };
 endsnippet
 
 snippet debug "debug mojo"

@@ -1,4 +1,8 @@
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.antialias: 1
 Xft.dpi: 96
+
 Xcursor.theme: Neutral
 
 ! Colour Scheme

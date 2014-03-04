@@ -37,3 +37,4 @@ Thumbs.db
 *.pid
 
 .vim/bundle/
+.config/configstore/

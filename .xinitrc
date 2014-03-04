@@ -11,7 +11,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-xmodmap ~/.i3/xmodmap
+# hide mouse coursor when isn't used
+unclutter -root -visible &
+
+# auto locking
+xautolock -time 7 -lock screenlock &
 
 if which urxvtd > /dev/null 2>&1; then
 	mkdir -p "$HOME/.urxvt" && rm -f "$HOME/.urxvt/"urxvtd-*

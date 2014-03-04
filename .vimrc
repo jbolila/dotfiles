@@ -136,6 +136,8 @@ nmap <silent> <leader>s :set spell!<CR>
 hi clear SpellBad
 hi SpellBad cterm=underline,bold ctermfg=white ctermbg=red
 
+autocmd FileType gitcommit setlocal spell
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " Plugins:
 
@@ -227,7 +229,7 @@ autocmd FileType css noremap <buffer> _t :call CSSBeautify()<cr>
 
 " :unlet b:npm_module_names # WHEN node_modules change!
 
-autocmd FileType javascript setlocal expandtab shiftwidth=4 softtabstop=4
+" autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
 
 " PERL
 
@@ -240,6 +242,8 @@ au FileType perl nnoremap <silent> _t :%!perltidier -q<cr>
 au FileType perl vnoremap <silent> _t :!perltidier -q<cr>
 
 nnoremap <silent>_pc :compiler perlcritic<cr>:make<cr>:cope<cr><cr>
+
+let g:syntastic_enable_perl_checker = 1
 
 " let g:syntastic_perl_lib_path = ['./lib']
 let g:syntastic_perl_perlcritic_thres = 3
