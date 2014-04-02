@@ -134,11 +134,36 @@ endsnippet
 # AMD (Asynchronous Module Definition) snippets
 
 snippet def "define an AMD module"
-define(${1:optional_name, }[${2:'jquery'}], ${3:callback});
+(function() {
+  'use strict';
+
+  define([${1:'deppendencies'}],
+  function(${2:arguments}) {
+    $0
+  });
+}());
 endsnippet
 
 snippet req "require an AMD module"
-require([${1:'dependencies'}], ${2:callback});
+(function() {
+  'use strict';
+
+  require([${1:'dependencies'}], function(${2:callback}) {
+    $0
+  });
+}());
+endsnippet
+
+snippet ld "$log.debug()"
+$log.debug(${VISUAL}$0);
+endsnippet
+
+snippet ll "$log.log()"
+$log.log(${VISUAL}$0);
+endsnippet
+
+snippet le "$log.error()"
+$log.error(${VISUAL}$0);
 endsnippet
 
 # vim:ft=snippets:

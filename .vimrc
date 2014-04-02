@@ -42,10 +42,6 @@ colorscheme jellybeans
 set t_Co=256
 syntax enable
 
-" highlight the maximum textwidth limit using a colored column
-set colorcolumn=+1
-autocmd ColorScheme * highlight! link ColorColumn CursorColumn
-
 set keywordprg=":help"
 
 function! NumberToggle()
@@ -98,6 +94,10 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
+" recover more
+set updatecount=10
+set swapsync=fsync
+
 " easy moving code blocks
 vnoremap < <gv " better identation
 vnoremap > >gv " better identation
@@ -115,7 +115,7 @@ nmap <silent> <leader>s :set spell!<CR>
 
 set cursorline
 " highlight Search ctermbg=black ctermfg=yellow cterm=underline
-set colorcolumn=+1
+let &colorcolumn=join(range(81,255),',')
 set list listchars=tab:→\ ,trail:·
 highlight Whitespace cterm=underline gui=underline ctermbg=NONE guibg=NONE ctermfg=lightred guifg=lightred
 autocmd ColorScheme * highlight Whitespace gui=underline ctermbg=NONE guibg=NONE ctermfg=lightred guifg=lightred
