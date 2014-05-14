@@ -2,14 +2,21 @@
 
 root = true
 
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
 [**.js]
 ; Path to the external file format
 ; The default is taken from the lib folder inside the folder extension.
 ; path=~/.vim/bundle/js-beautify/js/lib/beautify.js
 ; Javascript interpreter to be invoked by default 'node'
 bin=node
-indent_style = space
-indent_size = 2
+indent_style = tab
+; indent_style = space
+; indent_size = 2
 
 [**.css]
 ; path=~/.vim/bundle/js-beautify/js/lib/beautify-css.js

@@ -1,38 +1,43 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'bling/vim-airline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/ctrlp.vim'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'majutsushi/tagbar'
-Bundle 'vim-scripts/UltiSnips'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'majutsushi/tagbar'
+Plugin 'vim-scripts/UltiSnips'
+Plugin 'vim-scripts/SyntaxRange'
 
-Bundle 'myhere/vim-nodejs-complete'
-Bundle 'maksimr/vim-jsbeautify'
-Bundle 'einars/js-beautify'
+Plugin 'myhere/vim-nodejs-complete'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
 
-Bundle 'mhinz/vim-signify'
-Bundle 'mileszs/ack.vim'
+Plugin 'mhinz/vim-signify'
+Plugin 'rking/ag.vim'
+" Plugin 'mileszs/ack.vim'
 
-Bundle 'vim-scripts/perlhelp.vim'
-Bundle 'rkitover/perl-vim-mxd'
-Bundle 'yko/mojo.vim'
+Plugin 'vim-scripts/perlhelp.vim'
+Plugin 'rkitover/perl-vim-mxd'
+Plugin 'yko/mojo.vim'
 
-Bundle 'mattn/emmet-vim'
+Plugin 'mattn/emmet-vim'
+Plugin 'nono/vim-handlebars'
 
+call vundle#end()
 
 filetype plugin indent on
 syntax enable
@@ -181,6 +186,7 @@ set wildmenu
 set wildmode=longest:full,list:full
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:aghighlight=1
 
 " TCOMMENT
 nnoremap // :TComment<CR>
