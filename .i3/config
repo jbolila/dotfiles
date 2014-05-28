@@ -159,6 +159,9 @@ bindsym $mod+minus scratchpad show
 # Show the sup-mail scratchpad window, if any.
 # bindsym mod4+s [title="^Sup ::"] scratchpad show
 
+bindsym $mod+F1 exec firefox
+bindsym $mod+F4 exec gvim
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode

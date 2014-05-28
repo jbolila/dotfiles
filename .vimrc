@@ -33,6 +33,7 @@ Plugin 'rking/ag.vim'
 Plugin 'vim-scripts/perlhelp.vim'
 Plugin 'rkitover/perl-vim-mxd'
 Plugin 'yko/mojo.vim'
+Plugin 'pjcj/vim-hl-var'
 
 Plugin 'mattn/emmet-vim'
 Plugin 'nono/vim-handlebars'
@@ -200,7 +201,9 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_enable_signs = 1
 let g:syntastic_enable_highlighting = 0
 
-let g:syntastic_javascript_checkers = ['jshint']
+" eslint on radar!
+" let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:jshint_highlight_color = "Red"
 
 "let g:syntastic_python_checker_args='--ignore=E501,E302,E231,E261,E201,W402,W293'
@@ -243,7 +246,7 @@ let perl_include_pod=1
 
 au BufNewFile,BufRead *.psgi,*.t set filetype=perl
 au BufNewFile,BufRead *.mc,*.mp set filetype=mason
-" autocmd FileType perl setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType perl setlocal expandtab shiftwidth=4 softtabstop=4
 au FileType perl nnoremap <silent> _t :%!perltidier -q<cr>
 au FileType perl vnoremap <silent> _t :!perltidier -q<cr>
 
@@ -307,6 +310,9 @@ function! RunTestsInBuffers()
     execute ':!prove ' . tests
   endif
 endfunction
+
+" pjcj/vim-hl-var
+let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
 
 " end perl
 

@@ -2,7 +2,7 @@
 
 alias ls='ls --color=auto'
 
-alias vi="vim"
+alias vi="gvim"
 alias ack="ag"
 
 alias ll='ls -l'
