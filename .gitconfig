@@ -37,3 +37,10 @@
   rebase = true
 [branch]
   autosetupmerge = always
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
+[diff]
+	tool = vimdiff

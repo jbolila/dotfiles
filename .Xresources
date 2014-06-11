@@ -14,7 +14,7 @@ URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true
 URxvt.scrollcolor: #799D6A
 
-URxvt.letterSpace: -1
+! URxvt.letterSpace: -1
 
 URxvt.font: xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
 URxvt.boldFont:  xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
