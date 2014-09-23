@@ -26,6 +26,8 @@ Plugin 'myhere/vim-nodejs-complete'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'einars/js-beautify'
 
+Plugin 'genoma/vim-less'
+
 Plugin 'mhinz/vim-signify'
 Plugin 'rking/ag.vim'
 " Plugin 'mileszs/ack.vim'
@@ -170,6 +172,19 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|so|swp)$',
   \ }
 
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+
 " completion:
 set path=**
 set complete-=i
@@ -214,8 +229,8 @@ let g:tagbar_autoclose = 1
 " set runtimepath+=~/.vim/__WHAT_DIR_THEY_WANT__
 
 " YouCompleteMe
-let g:ycm_key_list_previous_completion=['<c-h>']
 let g:ycm_key_list_select_completion=['<c-l>']
+let g:ycm_key_list_previous_completion=['<c-h>']
 
 let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
