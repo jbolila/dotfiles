@@ -1,3 +1,6 @@
+*headingFont: -*-inputmono-bold-r-*-*-*-100-*-*-*-*-iso8859-16
+
+
 Xft.hinting: 1
 Xft.hintstyle: hintfull
 Xft.antialias: 1
@@ -16,7 +19,7 @@ URxvt.scrollcolor: #799D6A
 
 ! URxvt.letterSpace: -1
 
-URxvt.font: xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
-URxvt.boldFont:  xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
-URxvt.italicFont: xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
-URxvt.boldItalicFont: xft:Inconsolata_g_Powerline\\-g:style=g:size=8.5, xft:DejaVu Sans Mono for Powerline:size=8.5
+URxvt.font: xft:Sauce Code Powerline:style=Regular:size=9, xft:DejaVu Sans Mono for Powerline:size=8.5
+URxvt.boldFont:  xft:Sauce Code Powerline:style=Bold:size=9, xft:DejaVu Sans Mono for Powerline:size=8.5
+URxvt.italicFont: xft:Input Mono:style=Italic:size=9, xft:DejaVu Sans Mono for Powerline:size=8.5
+URxvt.boldItalicFont: xft:Input Mono:style=Bold Italic:size=9, xft:DejaVu Sans Mono for Powerline:size=8.5

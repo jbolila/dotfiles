@@ -1,0 +1,32 @@
+# vim:ft=snippets:
+
+snippet l "link"
+[${1:name}](${0:${VISUAL:link}})
+endsnippet
+
+snippet s "strike"
+~~${0:${VISUAL}}~~
+endsnippet
+
+snippet b "bold"
+**${0:${VISUAL}}**
+endsnippet
+
+snippet i "italic"
+*${0:${VISUAL}}*
+endsnippet
+
+snippet in "inline"
+\`${0:${VISUAL}}\`
+endsnippet
+
+snippet bt "block of code"
+\`\`\`${1:javascript}
+${0:${VISUAL}}
+\`\`\`
+endsnippet
+
+snippet t "task list entry"
+- [${1:x}] ${0:${VISUAL}}
+endsnippet
+

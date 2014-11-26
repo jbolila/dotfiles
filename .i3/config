@@ -73,7 +73,9 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-bindsym Mod4+l exec i3lock --image /home/jbolila/images/u-s-s-enterprise-star-trek-digital-art-hd-wallpaper-1920x1200-10080.png
+# bindsym Mod4+l exec i3lock --image /home/jbolila/images/u-s-s-enterprise-star-trek-digital-art-hd-wallpaper-1920x1200-10080.png
+bindsym Mod4+l exec "~/local/bin/fuzzy_lock.sh"
+exec xautolock -time 5 -locker '~/local/bin/fuzzy_lock.sh' &
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left

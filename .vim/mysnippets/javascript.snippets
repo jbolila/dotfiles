@@ -1,3 +1,108 @@
+snippet ! "shebang js"
+#!/usr/bin/env node
+endsnippet
+
+snippet () "IIFE"
+(function() {
+	'use strict';
+
+	${0:${VISUAL:#code here}}
+})();
+endsnippet
+
+# Angular snippets:
+
+snippet ng-m "Angular module"
+(function() {
+	'use strict';
+
+	angular.module('$1', [$0]);
+})();
+endsnippet
+
+snippet ng-c "Angular Controller"
+(function() {
+	'use strict';
+
+	angular.module('$1').controller('$2', $2);
+
+	/* @ngInject */
+	function $2($3) {
+		var vm = this;
+		$4
+		activate();
+
+		function activate() {
+			${0:${VISUAL:#code here}}
+		}
+	}
+})();
+endsnippet
+
+snippet ng-d "Angular Directive"
+(function() {
+	'use strict';
+
+	angular.module('$1').directive('$2', $2);
+
+	/* @ngInject */
+	function $2() {
+		var directive = {
+			link: link,
+			scope: {
+				$2: '='
+			}
+		};
+
+		return directive;
+
+		function link(scope, element) {
+			${0:${VISUAL:#code here}}
+		}
+	}
+})();
+endsnippet
+
+snippet ng-f "Angular Factory"
+(function() {
+	'use strict';
+
+	angular.module('$1').factory('$2', $2);
+
+	/* @ngInject */
+	function $2($3) {
+		var $4;
+
+		return $4;
+
+		function link(scope, element) {
+			${0:${VISUAL:#code here}}
+		}
+	}
+})();
+endsnippet
+
+snippet ng-fi "Angular Filter"
+(function() {
+	'use strict';
+
+	angular.module('$1').filter('$2', $2);
+
+	/* @ngInject */
+	function $2($3) {
+		var $4;
+
+		return $4;
+
+		function link(scope, element) {
+			${0:${VISUAL:#code here}}
+		}
+	}
+})();
+endsnippet
+
+# End Angular snippets:
+
 snippet get "Get Elements"
 getElement${1/(T)|.*/(?1:s)/}By${1:T}${1/(T)|(I)|.*/(?1:agName)(?2:d)/}('$2')
 endsnippet
@@ -97,6 +202,14 @@ endsnippet
 
 snippet cl "console.log"
 console.log(${1:"${2:value}"});
+endsnippet
+
+snippet cd "console.dir"
+console.dir(${1:"${2:value}"});
+endsnippet
+
+snippet ct "console.table"
+console.table(${1:"${2:value}"});
 endsnippet
 
 snippet cw "console.warn"

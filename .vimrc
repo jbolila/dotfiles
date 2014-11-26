@@ -9,22 +9,26 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'nanotech/jellybeans.vim'
+" Plugin 'morhetz/gruvbox'
+
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/UltiSnips'
+" Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/SyntaxRange'
 
 Plugin 'myhere/vim-nodejs-complete'
-Plugin 'maksimr/vim-jsbeautify'
+
 Plugin 'einars/js-beautify'
+Plugin 'maksimr/vim-jsbeautify'
 
 Plugin 'genoma/vim-less'
 
@@ -40,12 +44,33 @@ Plugin 'pjcj/vim-hl-var'
 Plugin 'mattn/emmet-vim'
 Plugin 'nono/vim-handlebars'
 
+" Clojure:
+Plugin 'tpope/vim-fireplace'
+Plugin 'tpope/vim-leiningen'
+Plugin 'guns/vim-clojure-static'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'guns/vim-clojure-highlight'
+
+Plugin 'guns/vim-sexp'
+Plugin 'tpope/vim-sexp-mappings-for-regular-people'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+
+" Plugin 'vim-scripts/paredit.vim'
+" Plugin 'kovisoft/slimv'
+
 call vundle#end()
 
 filetype plugin indent on
 syntax enable
 
 colorscheme jellybeans
+
+" set background=dark
+" colorscheme gruvbox
+" if !has("gui_running")
+"    let g:gruvbox_italic=0
+" endif
 
 set t_Co=256
 syntax enable
@@ -60,6 +85,10 @@ function! NumberToggle()
   endif
 endfunc
 
+" turn off the bell!
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 nnoremap <C-n> :call NumberToggle()<cr>
 
 set autoindent
@@ -71,16 +100,23 @@ set ttimeoutlen=50
 set incsearch
 set hlsearch
 
-let mapleader = ","
-let g:mapleader = ","
+" let mapleader = ","
+" let g:mapleader = ","
+
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
 
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
 nnoremap <leader>c <C-w>c
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
 
 " To real pratice disable arrow keys
 inoremap  <Up>     <NOP>
@@ -121,6 +157,9 @@ noremap <Leader>f zM
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
 
+" Preview in a broser
+nmap <F5> :w <Bar> !xdg-open %
+
 set cursorline
 " highlight Search ctermbg=black ctermfg=yellow cterm=underline
 let &colorcolumn=join(range(81,255),',')
@@ -158,7 +197,7 @@ let g:NERDTreeChDirMode=0
 let g:NERDTreeWinSize=40
 let g:NERDTreeWinPos="right"
 let g:bufExplorerUseCurrentWindow=1
-" let g:NERDTreeIgnore = ['\.pyc$']
+let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$']
 autocmd vimenter * if !argc() | NERDTree | endif
 
 nnoremap <leader>. :CtrlPTag<CR>    " ctags integration
@@ -166,7 +205,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 " exclude
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/lib/*
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(pyc|so|swp)$',
@@ -229,15 +268,24 @@ let g:tagbar_autoclose = 1
 " set runtimepath+=~/.vim/__WHAT_DIR_THEY_WANT__
 
 " YouCompleteMe
-let g:ycm_key_list_select_completion=['<c-l>']
-let g:ycm_key_list_previous_completion=['<c-h>']
+" let g:ycm_key_list_select_completion=['<c-l>']
+" let g:ycm_key_list_previous_completion=['<c-h>']
+"
+" let g:ycm_server_keep_logfiles = 1
+" let g:ycm_server_log_level = 'debug'
 
-let g:UltiSnipsExpandTrigger="<c-x>"
+
+" g:UltiSnipsVisualExpandTrigger that by default would be equal to
+" g:UltiSnipsExpandTrigger. e.g.: select visual and c-x start insert mode and
+" expand the new snippet, bung! the visual is replaced
+
+" let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit = "horizontal"
-let g:UltiSnipsDontReverseSearchPath = "1"
+let g:UltiSnipsEditSplit = "vertical"
+" let g:UltiSnipsDontReverseSearchPath = "1"
 let g:UltiSnipsSnippetsDir = '~/.vim/mysnippets/'
+" let g:UltiSnipsSnippetDirectories = ['bundle/vim-snippets/UltiSnips', 'mysnippets']
 let g:UltiSnipsSnippetDirectories = ['mysnippets']
 
 " JAVASCRIPT / HTML
@@ -254,6 +302,7 @@ autocmd FileType css noremap <buffer> _t :call CSSBeautify()<cr>
 " :unlet b:npm_module_names # WHEN node_modules change!
 
 " autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
+
 
 " PERL
 
@@ -305,6 +354,11 @@ let g:tagbar_type_perl = {
         \ 'd:pod:1:0',
     \ ],
 \ }
+
+" Clojure:
+" Fireplace doesn't have any particular support for ClojureScript, but..
+autocmd BufRead,BufNewFile *.cljs setlocal filetype=clojure
+
 
 " # Ovid (BBC) Turbo Charged Test Suites
 " # vim $(ack -l --perl 'api/v1/episode' t/)
