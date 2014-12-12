@@ -1,4 +1,4 @@
 dotfiles
 ========
 
-dotfiles for a arch vbox user
+dotfiles for an arch vbox user
