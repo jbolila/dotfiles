@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'endel/vim-github-colorscheme'
 " Plugin 'morhetz/gruvbox'
 
 Plugin 'bling/vim-airline'
@@ -25,6 +26,9 @@ Plugin 'vim-scripts/UltiSnips'
 " Plugin 'honza/vim-snippets'
 Plugin 'vim-scripts/SyntaxRange'
 
+Plugin 'editorconfig/editorconfig-vim'
+
+" Plugin 'jelera/vim-javascript-syntax'
 Plugin 'myhere/vim-nodejs-complete'
 
 Plugin 'einars/js-beautify'
@@ -106,6 +110,11 @@ set hlsearch
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
+" auto correct typos:
+iabbrev lenght length
+iabbrev treager trigger
+iabbrev triger trigger
+
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
 nnoremap <leader>c <C-w>c
@@ -117,6 +126,8 @@ nnoremap <leader>l <C-w>l
 " nnoremap <C-j> <C-w>j
 " nnoremap <C-k> <C-w>k
 " nnoremap <C-l> <C-w>l
+
+nnoremap ;; m`A;<Esc>``
 
 " To real pratice disable arrow keys
 inoremap  <Up>     <NOP>
@@ -255,6 +266,8 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_enable_signs = 1
 let g:syntastic_enable_highlighting = 0
 
+" au FileType javascript call JavaScriptFold()
+
 " eslint on radar!
 " let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_javascript_checkers = ['eslint']
@@ -310,7 +323,7 @@ let perl_include_pod=1
 
 au BufNewFile,BufRead *.psgi,*.t set filetype=perl
 au BufNewFile,BufRead *.mc,*.mp set filetype=mason
-autocmd FileType perl setlocal expandtab shiftwidth=4 softtabstop=4
+" autocmd FileType perl setlocal expandtab shiftwidth=4 softtabstop=4
 au FileType perl nnoremap <silent> _t :%!perltidier -q<cr>
 au FileType perl vnoremap <silent> _t :!perltidier -q<cr>
 

@@ -7,12 +7,13 @@
         "brace-style": [2, "1tbs", {"allowSingleLine": true}],
         "default-case": 2,
         "func-style": [2, "declaration"],
+        "curly": [2, "multi"],
         "guard-for-in": 2,
         "no-floating-decimal": 2,
         "no-nested-ternary": 2,
         "no-use-before-define": [2, "nofunc"],
         "radix": 2,
-        "space-unary-word-ops": 2,
+        "space-unary-ops": [2, { "words": true, "nonwords": false }],
         "space-after-keywords": [2, "always"],
         "valid-jsdoc": [2, {
             "prefer": {
@@ -20,6 +21,7 @@
              }
         }],
         "quotes": [1, "double", "allow-avoiding-escaped-quotes"],
-        "wrap-iife": [2, "inside"]
+        "wrap-iife": [2, "inside"],
+        "vars-on-top": 2
     }
 }

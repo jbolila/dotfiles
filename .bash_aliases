@@ -33,3 +33,32 @@ alias mkpass="openssl rand -base64 32"
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
 alias update='sudo pacman -Syu; sudo npm update npm@latest -g; sudo npm update -g; gem list `gem list | cut -d " " -f 1`'
+
+function d {
+  if [[ $# > 0 ]]; then
+    dict -d gcide $@ | colorit
+  else
+    dict -I | colorit
+  fi
+}
+function di {
+  if [[ $# > 0 ]]; then
+    dict -d foldoc $@ | colorit
+  else
+    dict -I | colorit
+  fi
+}
+function dp {
+  if [[ $# > 0 ]]; then
+    dict -d freedict-por-eng $@ | colorit
+  else
+    dict -I | colorit
+  fi
+}
+function t {
+  if [[ $# > 0 ]]; then
+    dict -d moby-thesaurus $@ | colorit
+  else
+    dict -I | colorit
+  fi
+}
