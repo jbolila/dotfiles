@@ -4,6 +4,7 @@ alias ls='ls --color=auto'
 
 alias vi="vim"
 alias v="vim"
+alias vs="vim-scp"
 alias vim-raw="vim -u NORC"
 alias ack="ag"
 

@@ -16,6 +16,10 @@ snippet () "IIFE"
 })();
 endsnippet
 
+snippet d "dump"
+console.log(JSON.stringify(${1:${VISUAL:#var}}, null, 4));$0
+endsnippet
+
 # Angular snippets:
 
 snippet ng-m "Angular module"

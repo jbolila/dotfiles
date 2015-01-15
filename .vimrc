@@ -15,6 +15,8 @@ Plugin 'endel/vim-github-colorscheme'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'scrooloose/syntastic'
@@ -158,7 +160,7 @@ vnoremap < <gv " better identation
 vnoremap > >gv " better identation
 
 set nofoldenable      "dont fold by default
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=9
 noremap <Space> za
 noremap <Leader>F zR
@@ -212,6 +214,7 @@ let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$']
 autocmd vimenter * if !argc() | NERDTree | endif
 
 nnoremap <leader>. :CtrlPTag<CR>    " ctags integration
+let g:ctrlp_extensions = ['funky']
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -221,6 +224,11 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(pyc|so|swp)$',
   \ }
+
+nnoremap <Leader>fu :CtrlPFunky<Cr>
+" narrow the list down with a word under cursor
+nnoremap <Leader>f :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -323,7 +331,9 @@ let perl_include_pod=1
 
 au BufNewFile,BufRead *.psgi,*.t set filetype=perl
 au BufNewFile,BufRead *.mc,*.mp set filetype=mason
-" autocmd FileType perl setlocal expandtab shiftwidth=4 softtabstop=4
+
+au FileType perl setlocal noexpandtab copyindent preserveindent sts=0 sw=4 ts=4
+
 au FileType perl nnoremap <silent> _t :%!perltidier -q<cr>
 au FileType perl vnoremap <silent> _t :!perltidier -q<cr>
 
