@@ -21,6 +21,8 @@ export rvm_ignore_gemrc_issues=1
 
 [ -r "$HOME/.smartcd_config" ] && ( [ -n $BASH_VERSION ] || [ -n $ZSH_VERSION ] ) && source ~/.smartcd_config
 
+[ -f "$HOME/.dircolors/dircolors.jellybeans" ] && eval `dircolors -b $HOME/.dircolors/dircolors.jellybeans`
+
 # PS1='[\u@\h \W]\$ '
 # . $HOME/.git_branch_prompt.sh
 source ~/local/bash-git-prompt/gitprompt.sh

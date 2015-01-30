@@ -300,6 +300,9 @@ let g:tagbar_autoclose = 1
 " g:UltiSnipsExpandTrigger. e.g.: select visual and c-x start insert mode and
 " expand the new snippet, bung! the visual is replaced
 
+" relay on max_line_length (in the .editorconfig file)
+let g:EditorConfig_max_line_indicator = "fill"
+
 " let g:UltiSnipsExpandTrigger="<c-x>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -415,3 +418,7 @@ autocmd User fugitive
   \ endif
 
 autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" for Gdiff opens a new tab and diffs the file in the active window against
+" common ancestor (:tabclose to close the tab).
+nnoremap <leader>ga :tab sp \| Gvedit :1 \| windo diffthis<CR>

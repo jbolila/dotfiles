@@ -1,5 +1,5 @@
 [user]
-  email = joao@bolila.com
+	email = joao@bolila.com
   name = João Bolila
 [core]
   excludesfile = /home/jbolila/.gitignore_global
@@ -39,7 +39,7 @@
 [branch]
   autosetupmerge = always
 [merge]
-	tool = vimdiff
+	tool = fugitive
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
@@ -47,3 +47,5 @@
 	tool = vimdiff
 [url "https://"]
 	insteadOf = git://
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"

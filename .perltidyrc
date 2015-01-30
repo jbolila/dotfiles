@@ -31,6 +31,8 @@
 
 -ce # cuddled-else
 
+-mbl=2 # blank lines, maximum
+
 # -lp
 # -vtc=2 # closing token placement (on the same line)
 
