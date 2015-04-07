@@ -20,8 +20,11 @@
                 "return": "returns"
              }
         }],
-        "quotes": [1, "double", "allow-avoiding-escaped-quotes"],
+        "quotes": [1, "single", "allow-avoiding-escaped-quotes"],
         "wrap-iife": [2, "inside"],
-        "vars-on-top": 2
+        "vars-on-top": 2,
+        "no-underscore-dangle": 0,
+        "space-unary-ops": [1, {"words": false, "nowords": true}],
+        "camelcase": [2, {"properties": "never"}]
     }
 }

@@ -5,7 +5,7 @@ ${0:${VISUAL:#code here}}
 endsnippet
 
 snippet r "require"
-require('${1:${VISUAL:#package}}')$0
+var $1 = require('${0:$1}');
 endsnippet
 
 snippet () "IIFE"
@@ -17,6 +17,10 @@ snippet () "IIFE"
 endsnippet
 
 snippet d "dump"
+debug(JSON.stringify(${1:${VISUAL:#var}}, null, 4));$0
+endsnippet
+
+snippet dl "dump"
 console.log(JSON.stringify(${1:${VISUAL:#var}}, null, 4));$0
 endsnippet
 

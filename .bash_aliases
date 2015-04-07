@@ -31,6 +31,9 @@ alias now='perl -M5.010 -e "say time"'
 alias tmux="tmux -2"
 alias mkpass="openssl rand -base64 32"
 
+alias npm-outdated="npm outdated --json --depth=0 | jq --ascii-output --monochrome-output '. | keys | .[]'"
+alias npm-outdated-update="npm outdated --json --depth=0 | jq --ascii-output --monochrome-output '. | keys | .[]' | xargs npm install $1 --save-dev"
+
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
 alias update='sudo pacman -Syu; sudo npm update npm@latest -g; sudo npm update -g; gem list `gem list | cut -d " " -f 1`'

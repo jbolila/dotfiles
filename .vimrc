@@ -35,6 +35,7 @@ Plugin 'myhere/vim-nodejs-complete'
 
 Plugin 'einars/js-beautify'
 Plugin 'maksimr/vim-jsbeautify'
+Plugin 'elzr/vim-json'
 
 Plugin 'genoma/vim-less'
 

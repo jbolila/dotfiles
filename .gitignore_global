@@ -13,7 +13,7 @@ Thumbs.db
 *.pyc
 .ropeproject/
 *.egg-info/
-/node_modules
+# node_modules/*
 # ignore any vim files:
 *.swp
 *.swo
