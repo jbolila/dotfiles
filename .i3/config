@@ -47,10 +47,6 @@ set $color14 #8FBFDC
 set $color7 #888888
 set $color15 #E8E8D3
 
-client.focused          $color2     $color2     $background $color0
-client.focused_inactive $color2     $background $foreground $color0
-client.unfocused        $background $background $foreground $color0
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -193,13 +189,19 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-        colors {
-
-          statusline $foreground
-          background $background
-          separator  $background
-          focused_workspace   $background $foreground $background
-          inactive_workspace  $background $background $foreground
-        }
+  status_command i3status
+  colors {
+    separator #dc322f
+    background #002b36
+    statusline #268bd2
+    focused_workspace #fdf6e3 #859900 #fdf6e3
+    active_workspace #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace #586e75 #93a1a1 #002b36
+    urgent_workspace #d33682 #d33682 #fdf6e3
+  }
 }
+
+client.focused #859900 #859900 #fdf6e3 #859900
+client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
+client.unfocused #073642 #073642 #93a1a1 #586e75
+client.urgent #d33682 #d33682 #fdf6e3 #dc322f

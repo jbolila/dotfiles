@@ -29,7 +29,7 @@ alias perlcritic11='perlcritic -verbose 11'
 alias perlcritic5='perlcritic -verbose 5'
 alias perlcritic8='perlcritic -verbose 8'
 
-alias c='pygmentize -O style=monokai -f console256 -g'
+alias c='pygmentize -O style=solarizeddark -f console256 -g'
 
 alias now='perl -M5.010 -e "say time"'
 

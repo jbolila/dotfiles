@@ -17,7 +17,7 @@ URxvt.keysym.M-u: perl:url-select:select_next
 Xcursor.theme: Neutral
 
 ! Colour Scheme
-#include "/home/jbolila/.config/termcolours/jellybeans"
+#include "/home/jbolila/.config/termcolours/solarized"
 
 ! URXvt Options
 URxvt.depth: 32

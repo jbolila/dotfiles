@@ -9,11 +9,13 @@ export NVM_DIR="/home/jbolila/.nvm"
 [[ $- != *i* ]] && return
 
 if [ -s $TMUX ]; then
-	if [ /usr/share/terminfo/x/xterm-256color ]; then
-		export TERM='xterm-256color'
-	else
-		export TERM='xterm-color'
-	fi
+  if [ /usr/share/terminfo/r/rxvt-unicode-256color ]; then
+    export TERM='rxvt-unicode-256color'
+  elif [ /usr/share/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+  else
+    export TERM='xterm-color'
+  fi
 fi
 
 export BROWSER="firefox"
@@ -28,7 +30,7 @@ export rvm_ignore_gemrc_issues=1
 
 [ -r "$HOME/.smartcd_config" ] && ( [ -n $BASH_VERSION ] || [ -n $ZSH_VERSION ] ) && source ~/.smartcd_config
 
-[ -f "$HOME/.dircolors/dircolors.jellybeans" ] && eval `dircolors -b $HOME/.dircolors/dircolors.jellybeans`
+[ -f "$HOME/.dircolors/dircolors.solarized" ] && eval `dircolors -b $HOME/.dircolors/dircolors.solarized`
 
 # PS1='[\u@\h \W]\$ '
 # . $HOME/.git_branch_prompt.sh
