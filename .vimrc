@@ -4,99 +4,80 @@ filetype off                  " required!
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
-" required!
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'endel/vim-github-colorscheme'
-" Plugin 'morhetz/gruvbox'
+Plugin 'scrooloose/syntastic'
 
-Plugin 'bling/vim-airline'
+Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'nanotech/jellybeans.vim'
+" Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'itchyny/lightline.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/ctrlp.vim'
-Plugin 'tacahiroy/ctrlp-funky'
 
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
-Plugin 'scrooloose/syntastic'
-" Plugin 'Valloric/YouCompleteMe'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'Raimondi/delimitMate'
-Plugin 'majutsushi/tagbar'
+
 Plugin 'vim-scripts/UltiSnips'
-" Plugin 'honza/vim-snippets'
-Plugin 'vim-scripts/SyntaxRange'
 
 Plugin 'editorconfig/editorconfig-vim'
 
-" Plugin 'jelera/vim-javascript-syntax'
-Plugin 'myhere/vim-nodejs-complete'
+Plugin 'reedes/vim-litecorrect'
+Plugin 'reedes/vim-wordy'
 
 Plugin 'einars/js-beautify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'elzr/vim-json'
+Plugin 'pangloss/vim-javascript'
 
-Plugin 'genoma/vim-less'
+Plugin 'mattn/emmet-vim'
+Plugin 'godlygeek/tabular'
 
 Plugin 'mhinz/vim-signify'
 Plugin 'rking/ag.vim'
-" Plugin 'mileszs/ack.vim'
 
-Plugin 'vim-scripts/perlhelp.vim'
-Plugin 'rkitover/perl-vim-mxd'
-Plugin 'yko/mojo.vim'
-Plugin 'pjcj/vim-hl-var'
+Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'michaeljsmith/vim-indent-object'
 
-Plugin 'mattn/emmet-vim'
-Plugin 'nono/vim-handlebars'
+" Rust
+" Plugin 'rust-lang/rust.vim'
+" Plugin 'cespare/vim-toml'
+" Plugin 'phildawes/racer'
 
-" Clojure:
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-leiningen'
-Plugin 'guns/vim-clojure-static'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'guns/vim-clojure-highlight'
-
-Plugin 'guns/vim-sexp'
-Plugin 'tpope/vim-sexp-mappings-for-regular-people'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-
-" Plugin 'vim-scripts/paredit.vim'
-" Plugin 'kovisoft/slimv'
+if executable('ctags')
+  Bundle 'majutsushi/tagbar'
+endif
 
 call vundle#end()
+
+let $GIT_SSL_NO_VERIFY = 'true' " required in the corporate network
 
 filetype plugin indent on
 syntax enable
 
-colorscheme jellybeans
-
-" set background=dark
-" colorscheme gruvbox
-" if !has("gui_running")
-"    let g:gruvbox_italic=0
-" endif
-
+set encoding=utf8
 set t_Co=256
-syntax enable
+" let g:solarized_termcolors=256
 
-set keywordprg=":help"
+set background=light
+colorscheme PaperColor
+" colorscheme jellybeans
+" colorscheme solarized
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
+set number
+set relativenumber
+
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " turn off the bell!
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
-
-nnoremap <C-n> :call NumberToggle()<cr>
 
 set autoindent
 set backspace=indent,eol,start
@@ -105,32 +86,20 @@ set ttimeout
 set ttimeoutlen=50
 
 set incsearch
-set hlsearch
-
-" let mapleader = ","
-" let g:mapleader = ","
+set hlsearch                 " highlight search
+set showmatch                " matching brackets when over
+set mat=2                    " matching time in secs
 
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
-" auto correct typos:
-iabbrev lenght length
-iabbrev treager trigger
-iabbrev triger trigger
-
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
 nnoremap <leader>c <C-w>c
-nnoremap <leader>h <C-w>h
-nnoremap <leader>j <C-w>j
-nnoremap <leader>k <C-w>k
-nnoremap <leader>l <C-w>l
-" nnoremap <C-h> <C-w>h
-" nnoremap <C-j> <C-w>j
-" nnoremap <C-k> <C-w>k
-" nnoremap <C-l> <C-w>l
-
-nnoremap ;; m`A;<Esc>``
+nnoremap <leader>h <C-w>3h
+nnoremap <leader>j <C-w>3j
+nnoremap <leader>k <C-w>3k
+nnoremap <leader>l <C-w>3l
 
 " To real pratice disable arrow keys
 inoremap  <Up>     <NOP>
@@ -142,37 +111,7 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-set hlsearch                 " highlight search
-set showmatch                " matching brackets when over
-set mat=2                    " matching time in secs
-
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
-" recover more
-set updatecount=10
-set swapsync=fsync
-
-" easy moving code blocks
-vnoremap < <gv " better identation
-vnoremap > >gv " better identation
-
-set nofoldenable      "dont fold by default
-set foldmethod=syntax
-set foldlevel=9
-noremap <Space> za
-noremap <Leader>F zR
-noremap <Leader>f zM
-
-
-" Toggle spell checking on and off with `,s`
-nmap <silent> <leader>s :set spell!<CR>
-
-" Preview in a broser
-nmap <F5> :w <Bar> !xdg-open %
+nnoremap ;; m`A;<Esc>``
 
 set cursorline
 " highlight Search ctermbg=black ctermfg=yellow cterm=underline
@@ -189,47 +128,40 @@ autocmd BufWritePre * :%s/\s\+$//e
 noremap <C-z> :update<CR>
 vnoremap <C-z> <C-C>:update<CR>
 
+" tabs (:h tabpage)
+set tabpagemax=15
+
 " Set region to British English
 set spelllang=en_gb
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
+
 hi clear SpellBad
-hi SpellBad cterm=underline,bold ctermfg=white ctermbg=red
+hi SpellBad cterm=underline ctermfg=white ctermbg=blue
 
 autocmd FileType gitcommit setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal spell
 
-" Plugins:
 
-" airline
-let g:airline_powerline_fonts = 1
-set laststatus=2
+" recover more
+set updatecount=10
+set swapsync=fsync
 
-map <leader>n :NERDTreeToggle<CR>
-let g:NERDTreeChDirMode=0
-let g:NERDTreeWinSize=40
-let g:NERDTreeWinPos="right"
-let g:bufExplorerUseCurrentWindow=1
-let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$']
-autocmd vimenter * if !argc() | NERDTree | endif
+" easy moving code blocks
+vnoremap < <gv " better identation
+vnoremap > >gv " better identation
 
-nnoremap <leader>. :CtrlPTag<CR>    " ctags integration
-let g:ctrlp_extensions = ['funky']
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-" exclude
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/lib/*
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(pyc|so|swp)$',
-  \ }
+" easy moving code blocks
+vnoremap < <gv " better identation
+vnoremap > >gv " better identation
 
-nnoremap <Leader>fu :CtrlPFunky<Cr>
-" narrow the list down with a word under cursor
-nnoremap <Leader>f :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-
+set nofoldenable      " don't fold by default
+set foldmethod=syntax
+set foldlevel=9
+noremap <Space> za
+noremap <Leader>F zR
+noremap <Leader>f zM
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
@@ -243,18 +175,9 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-
 " completion:
 set path=**
 set complete-=i
-
-" Emmet
-let g:user_emmet_mode='a'    "only enable normal mode functions.
-let g:user_emmet_install_global = 0
-autocmd FileType html,html.epl,css EmmetInstall
-
-inoremap <lt>/ </<C-X><C-O>
-inoremap <leader>/ </<C-X><C-O>
 
 " dir completion <S-Tab>
 set wildmenu
@@ -263,11 +186,65 @@ set wildmode=longest:full,list:full
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:aghighlight=1
 
-" TCOMMENT
-nnoremap // :TComment<CR>
-vnoremap // :TComment<CR>
 
-" PROGRAMMING
+" " Plugin configuration:
+
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = '~/.vim/mysnippets/'
+let g:UltiSnipsSnippetDirectories = ['mysnippets']
+
+set laststatus=2
+let g:lightline = {
+  \ 'component': {
+  \   'lineinfo': ' %3l:%-2v',
+  \ },
+  \ 'component_function': {
+  \   'readonly': 'MyReadonly',
+  \   'fugitive': 'MyFugitive'
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
+
+function! MyReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! MyFugitive()
+  if exists('*fugitive#head')
+    let _ = fugitive#head()
+    return strlen(_) ? ''._ : ''
+  endif
+  return ''
+endfunction
+
+map <leader>n :NERDTreeToggle<CR>
+map <leader>r :NERDTreeCWD<CR>
+let g:NERDTreeChDirMode=0
+let g:NERDTreeWinSize=40
+let g:NERDTreeWinPos="right"
+let g:bufExplorerUseCurrentWindow=1
+let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$']
+autocmd vimenter * if !argc() | NERDTree | endif
+
+nnoremap <leader>b :CtrlPBuffer<CR>    " CtrlP on buffers
+nnoremap <leader>. :CtrlPTag<CR>    " ctags integration
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+" exclude
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
+" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/lib/* " Evel!!
+" breaks the vim-jsbeautify plugin!
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(pyc|so|swp)$',
+  \ }
+
+
+" Programming!
 
 let g:syntastic_check_on_open = 1
 " let g:syntastic_quiet_warnings = 0
@@ -275,61 +252,38 @@ let g:syntastic_quiet_messages = {'level': 'warnings'}
 let g:syntastic_enable_signs = 1
 let g:syntastic_enable_highlighting = 0
 
+let g:syntastic_enable_perl_checker = 1
+let g:syntastic_perl_perlcritic_thres = 3
+
 " au FileType javascript call JavaScriptFold()
 
 " eslint on radar!
-" let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_javascript_checkers = ['eslint']
 let g:jshint_highlight_color = "Red"
 
-"let g:syntastic_python_checker_args='--ignore=E501,E302,E231,E261,E201,W402,W293'
-let syntastic_python_flake8_args='--ignore=E501'
-let g:syntastic_python_checkers=['pylint']
-
-let g:tagbar_autoclose = 1
-" set runtimepath+=~/.vim/__WHAT_DIR_THEY_WANT__
-
-" YouCompleteMe
-" let g:ycm_key_list_select_completion=['<c-l>']
-" let g:ycm_key_list_previous_completion=['<c-h>']
-"
-" let g:ycm_server_keep_logfiles = 1
-" let g:ycm_server_log_level = 'debug'
-
-
-" g:UltiSnipsVisualExpandTrigger that by default would be equal to
-" g:UltiSnipsExpandTrigger. e.g.: select visual and c-x start insert mode and
-" expand the new snippet, bung! the visual is replaced
-
-" relay on max_line_length (in the .editorconfig file)
-let g:EditorConfig_max_line_indicator = "fill"
-
-" let g:UltiSnipsExpandTrigger="<c-x>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit = "vertical"
-" let g:UltiSnipsDontReverseSearchPath = "1"
-let g:UltiSnipsSnippetsDir = '~/.vim/mysnippets/'
-" let g:UltiSnipsSnippetDirectories = ['bundle/vim-snippets/UltiSnips', 'mysnippets']
-let g:UltiSnipsSnippetDirectories = ['mysnippets']
-
-" JAVASCRIPT / HTML
-
-autocmd FileType javascript set omnifunc=nodejscomplete#CompleteJS
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-" jsbeautify
+" " jsbeautify
 autocmd FileType javascript noremap <buffer> _t :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> _t :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> _t :call CSSBeautify()<cr>
 
-" :unlet b:npm_module_names # WHEN node_modules change!
+autocmd BufNewFile,BufRead *.c set formatprg=astyle\ --style=linux
+autocmd BufNewFile,BufRead *.h set formatprg=astyle\ --style=linux
 
-" autocmd FileType javascript setlocal expandtab shiftwidth=2 softtabstop=2
+" relay on max_line_length (in the .editorconfig file)
+let g:EditorConfig_max_line_indicator = "fill"
 
+" GIT
+autocmd User fugitive
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
 
-" PERL
+autocmd BufReadPost fugitive://* set bufhidden=delete
+
+" for Gdiff opens a new tab and diffs the file in the active window against
+" common ancestor (:tabclose to close the tab).
+nnoremap <leader>ga :tab sp \| Gvedit :1 \| windo diffthis<CR>
+
 
 let perl_include_pod=1
 
@@ -343,10 +297,7 @@ au FileType perl vnoremap <silent> _t :!perltidier -q<cr>
 
 nnoremap <silent>_pc :compiler perlcritic<cr>:make<cr>:cope<cr><cr>
 
-let g:syntastic_enable_perl_checker = 1
-
 " let g:syntastic_perl_lib_path = ['./lib']
-let g:syntastic_perl_perlcritic_thres = 3
 " let g:syntastic_perl_perlcritic_args = ''
 
 autocmd FileType perl inoremap  <leader>;     <C-o>A;
@@ -359,67 +310,32 @@ endif
 
 let perl_fold=1
 
-" http://blog.stwrt.ca/2012/10/31/vim-ctags
-nnoremap <silent> <leader>t :TagbarToggle<CR>
-
-" Tagbar settings to recognise Perl Moose
-let g:tagbar_type_perl = {
-    \ 'ctagstype'   : 'Perl',
-    \ 'kinds' : [
-        \ 'p:packages:1:0',
-        \ 'u:uses:1:0',
-        \ 'r:requires:1:0',
-        \ 'e:extends',
-        \ 'w:roles',
-        \ 'o:ours:1:0',
-        \ 'c:constants:1:0',
-        \ 'f:formats:1:0',
-        \ 'a:attributes',
-        \ 's:subroutines',
-        \ 'x:around:1:0',
-        \ 'l:aliases',
-        \ 'd:pod:1:0',
-    \ ],
-\ }
-
-" Clojure:
-" Fireplace doesn't have any particular support for ClojureScript, but..
-autocmd BufRead,BufNewFile *.cljs setlocal filetype=clojure
-
-
-" # Ovid (BBC) Turbo Charged Test Suites
-" # vim $(ack -l --perl 'api/v1/episode' t/)
-map <leader>tb :call RunTestsInBuffers()<CR>
-function! RunTestsInBuffers()
-  let i = 1
-  let tests = ''
-  while (i <= bufnr("$"))
-    let filename = bufname(i)
-    if match(filename, '\.t$') > -1
-      let tests = tests . ' "' . filename . '"'
-    endif
-    let i = i+1
-  endwhile
-  if !strlen(tests)
-    echo "No tests found in buffers"
-  else
-    execute ':!prove ' . tests
-  endif
-endfunction
-
 " pjcj/vim-hl-var
-let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
+" let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
 
-" end perl
+" " Rust.lang
 
-" GIT
-autocmd User fugitive
-  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-  \   nnoremap <buffer> .. :edit %:h<CR> |
-  \ endif
+" " tagbar
+" let g:tagbar_type_rust = {
+"     \ 'ctagstype' : 'rust',
+"     \ 'kinds' : [
+"         \'T:types,type definitions',
+"         \'f:functions,function definitions',
+"         \'g:enum,enumeration names',
+"         \'s:structure names',
+"         \'m:modules,module names',
+"         \'c:consts,static constants',
+"         \'t:traits,traits',
+"         \'i:impls,trait implementations',
+"     \]
+"     \}
 
-autocmd BufReadPost fugitive://* set bufhidden=delete
+" " let g:racer_cmd = "/Users/jbolila/local/bin/racer"
+" " let $RUST_SRC_PATH="/home/jbolila/local/rustc-1.1.0/src/"
 
-" for Gdiff opens a new tab and diffs the file in the active window against
-" common ancestor (:tabclose to close the tab).
-nnoremap <leader>ga :tab sp \| Gvedit :1 \| windo diffthis<CR>
+" augroup litecorrect
+"   autocmd!
+"   autocmd FileType markdown,mkd call litecorrect#init()
+"   autocmd FileType textile call litecorrect#init()
+" augroup END
+

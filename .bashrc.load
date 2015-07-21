@@ -1,6 +1,6 @@
 #!sh
 
-export PATH=$PATH:$HOME/.rvm/bin:$HOME/local/bin
+export PATH=$PATH:$HOME/.rvm/bin:$HOME/local/bin:$HOME/go/bin
 
 export NVM_DIR="/home/jbolila/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
@@ -8,16 +8,20 @@ export NVM_DIR="/home/jbolila/.nvm"
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ /usr/share/terminfo/x/xterm-256color ]; then
-	export TERM='xterm-256color'
-else
-	export TERM='xterm-color'
+if [ -s $TMUX ]; then
+	if [ /usr/share/terminfo/x/xterm-256color ]; then
+		export TERM='xterm-256color'
+	else
+		export TERM='xterm-color'
+	fi
 fi
 
 export BROWSER="firefox"
 export EDITOR="vim"
 
-source ~/perl5/perlbrew/etc/bashrc
+export GOPATH=~/go
+
+# source ~/perl5/perlbrew/etc/bashrc
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export rvm_ignore_gemrc_issues=1

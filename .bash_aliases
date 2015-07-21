@@ -2,9 +2,14 @@
 
 alias ls='ls --color=auto'
 
+export PAGER=/usr/bin/vimpager
+alias less=$PAGER
+alias zless=$PAGER
+
 alias vi="vim"
 alias v="vim"
 alias vs="vim-scp"
+# rsync -e ssh -van --delete . remote@host:remotedir
 alias vim-raw="vim -u NORC"
 alias ack="ag"
 

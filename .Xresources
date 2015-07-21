@@ -6,6 +6,14 @@ Xft.hintstyle: hintfull
 Xft.antialias: 1
 Xft.dpi: 96
 
+URxvt.perl-ext-common: default,matcher,url-select
+! URxvt.url-launcher: firefox
+! URxvt.matcher.button: 1
+
+URxvt.url-select.launcher: firefox
+URxvt.url-select.underline: true
+URxvt.keysym.M-u: perl:url-select:select_next
+
 Xcursor.theme: Neutral
 
 ! Colour Scheme

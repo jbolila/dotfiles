@@ -1,10 +1,10 @@
 [user]
-	email = joao@bolila.com
+  email = joao@bolila.com
   name = João Bolila
 [core]
   excludesfile = /home/jbolila/.gitignore_global
   editor = vim
-  pager = less -R
+  # pager = less -R
   logAllRefUpdates = true
   # worktree = /
 [alias]
@@ -16,6 +16,7 @@
   br = branch
   df = diff
   dc = diff --cached
+  dt = diff-tree --no-commit-id --name-only -r
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   lg = log -p
   lol = log --graph --decorate --pretty=oneline --abbrev-commit
@@ -39,13 +40,15 @@
 [branch]
   autosetupmerge = always
 [merge]
-	tool = fugitive
-	conflictstyle = diff3
+  tool = fugitive
+  conflictstyle = diff3
 [mergetool]
-	prompt = false
+  prompt = false
 [diff]
-	tool = vimdiff
+  tool = vimdiff
 [url "https://"]
-	insteadOf = git://
+  insteadOf = git://
 [mergetool "fugitive"]
-	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+  cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+[http]
+	sslVerify = false
