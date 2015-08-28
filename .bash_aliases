@@ -11,6 +11,7 @@ alias v="vim"
 alias vs="vim-scp"
 # rsync -e ssh -van --delete . remote@host:remotedir
 alias vim-raw="vim -u NORC"
+alias vim-golf="vim -u $HOME/.vim/vimgolf.vimrc"
 alias ack="ag"
 
 alias ll='ls -l'

@@ -71,6 +71,8 @@ colorscheme PaperColor
 set number
 set relativenumber
 
+set history=200
+
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -143,18 +145,29 @@ hi SpellBad cterm=underline ctermfg=white ctermbg=blue
 autocmd FileType gitcommit setlocal spell
 autocmd BufRead,BufNewFile *.md setlocal spell
 
+" vimcast #14 edit (open from the current file folder)
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+map <leader>ew :e %%
+map <leader>es :sp %%
+map <leader>ev :vsp %%
+map <leader>et :tabe %%
+
+" Copy to X CLIPBOARD
+map <leader>cc :w !xsel -i -b<CR>
+map <leader>cp :w !xsel -i -p<CR>
+map <leader>cs :w !xsel -i -s<CR>
+" Paste from X CLIPBOARD
+map <leader>pp :r!xsel -p<CR>
+map <leader>ps :r!xsel -s<CR>
+map <leader>pb :r!xsel -b<CR>
 
 " recover more
 set updatecount=10
 set swapsync=fsync
 
 " easy moving code blocks
-vnoremap < <gv " better identation
-vnoremap > >gv " better identation
-
-" easy moving code blocks
-vnoremap < <gv " better identation
-vnoremap > >gv " better identation
+vnoremap < <gv
+vnoremap > >gv
 
 set nofoldenable      " don't fold by default
 set foldmethod=syntax
@@ -178,6 +191,8 @@ vnoremap <silent> # :<C-U>
 " completion:
 set path=**
 set complete-=i
+
+set hidden " allow switch buffer even was modified and not saved
 
 " dir completion <S-Tab>
 set wildmenu

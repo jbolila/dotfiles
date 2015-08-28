@@ -23,7 +23,7 @@ Xcursor.theme: Neutral
 URxvt.depth: 32
 URxvt.scrollstyle: plain
 URxvt.scrollBar_right: true
-URxvt.scrollcolor: #799D6A
+URxvt.scrollColor: #839496
 
 ! URxvt.letterSpace: -1
 
