@@ -46,29 +46,33 @@ alias update='sudo pacman -Syu; sudo npm update npm@latest -g; sudo npm update -
 
 function d {
   if [[ $# > 0 ]]; then
-    dict -d gcide $@ | colorit
+    dict -d gcide $@ | colorit | vimpager
   else
-    dict -I | colorit
+    dict -I | colorit | vimpager
   fi
 }
 function di {
   if [[ $# > 0 ]]; then
-    dict -d foldoc $@ | colorit
+    dict -d foldoc $@ | colorit | vimpager
   else
-    dict -I | colorit
+    dict -I | colorit | vimpager
   fi
 }
 function dp {
   if [[ $# > 0 ]]; then
-    dict -d freedict-por-eng $@ | colorit
+    dict -d freedict-por-eng $@ | colorit | vimpager
   else
-    dict -I | colorit
+    dict -I | colorit | vimpager
   fi
 }
 function t {
   if [[ $# > 0 ]]; then
-    dict -d moby-thesaurus $@ | colorit
+    dict -d moby-thesaurus $@ | colorit | vimpager
   else
-    dict -I | colorit
+    dict -I | colorit | vimpager
   fi
 }
+function verbteacher {
+    curl -s http://conjugator.reverso.net/conjugation-english-verb-$1.html | \
+    sed -n "/>Preterite\|>Past</{s@<[^>]*>@ @g;s/\s\+/ /g;/e I/s/.* I \([^ ]*\) you .*/Simple past: \1/;/ Past/s/ Past /Past participle: /;p}" ;
+ }

@@ -115,6 +115,9 @@ noremap   <Right>  <NOP>
 
 nnoremap ;; m`A;<Esc>``
 
+" paste
+xnoremap <leader>p "_dP
+
 set cursorline
 " highlight Search ctermbg=black ctermfg=yellow cterm=underline
 let &colorcolumn=join(range(81,255),',')
@@ -201,7 +204,6 @@ set wildmode=longest:full,list:full
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:aghighlight=1
 
-
 " " Plugin configuration:
 
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -258,6 +260,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(pyc|so|swp)$',
   \ }
 
+
+" Notes (pandoc)
+nmap <leader>vv :!pandoc -t html5 -T 'Pandoc Generated - "%"' --smart --standalone --self-contained --table-of-contents --data-dir %:p:h -c ~/.dotfiles/css/github-pandoc.css "%" \|bcat<cr><cr>
 
 " Programming!
 
@@ -354,3 +359,18 @@ let perl_fold=1
 "   autocmd FileType textile call litecorrect#init()
 " augroup END
 
+" from http://vim.wikia.com/wiki/Insert_current_date_or_time
+" If buffer modified, update any 'Last modified: ' in the first 20 lines.
+" 'Last modified: ' can have up to 10 characters before (they are retained).
+" Restores cursor and window position using save_cursor variable.
+function! LastModified()
+  if &modified
+    let save_cursor = getpos(".")
+    let n = min([20, line("$")])
+    keepjumps exe '1,' . n . 's#^\(.\{,10}Last modified: \).*#\1' .
+          \ strftime('%a %b %d, %Y  %I:%M%p') . '#e'
+    call histdel('search', -1)
+    call setpos('.', save_cursor)
+  endif
+endfun
+autocmd BufWritePre * call LastModified()
