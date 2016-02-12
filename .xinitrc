@@ -17,11 +17,17 @@ fi
 
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
 
+# Clipboard / Primary
+autocutsel -fork &
+autocutsel -selection PRIMARY -fork &
+
 # hide mouse coursor when isn't used
 unclutter -root -visible &
 
 # auto locking
 xautolock -time 7 -lock ~/local/bin/fuzzy_lock.sh &
+
+setxkbmap -option compose:menu
 
 if which urxvtd > /dev/null 2>&1; then
   mkdir -p "$HOME/.urxvt" && rm -f "$HOME/.urxvt/"urxvtd-*

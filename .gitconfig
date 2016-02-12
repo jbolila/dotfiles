@@ -1,6 +1,6 @@
 [user]
-  email = joao@bolila.com
-  name = João Bolila
+  email = jbolila@idirect.net
+  name = Joao Bolila
 [core]
   excludesfile = /home/jbolila/.gitignore_global
   editor = vim
@@ -27,7 +27,7 @@
   unstage = reset HEAD --
   standup = !"git log --reverse --branches --since=$(if [[ \"Mon\" == \"$(date +%a)\" ]]; then echo \"last friday\"; else echo \"yesterday\"; fi) --author=$(git config --get user.email) --format=format:'%C(cyan) %ad %C(yellow)%h %Creset %s %Cgreen%d' --date=local"
 [push]
-  default = tracking
+  default = current
 [color]
   ui = true
 [receive]
@@ -41,7 +41,7 @@
   autosetupmerge = always
 [merge]
   tool = fugitive
-  conflictstyle = diff3
+	conflictstyle = diff3
 [mergetool]
   prompt = false
 [diff]

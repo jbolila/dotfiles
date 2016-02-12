@@ -1,6 +1,7 @@
 #!sh
 
-export PATH=$PATH:$HOME/.rvm/bin:$HOME/local/bin:$HOME/go/bin
+export GRADLE_HOME=$HOME/local/gradle-2.10
+export PATH=$PATH:$HOME/.rvm/bin:$HOME/local/bin:$GRADLE_HOME/bin
 
 export NVM_DIR="/home/jbolila/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
@@ -20,6 +21,9 @@ fi
 
 export BROWSER="firefox"
 export EDITOR="vim"
+export VISUAL="vim"
+set -o vi
+# now Esc-v to edit the command on vim (http://www.gnu.org/software/bash/manual/bashref.html#Readline-vi-Mode)
 
 export GOPATH=~/go
 
@@ -78,12 +82,24 @@ function g {
 
 function p {
   if [[ $# > 0 ]]; then
-    zathura $@
+    zathura "$@"
   else
     echo 'zathura! what is the pdf to open?'
   fi
   #  git ${@:-'status --short --branch'}
 }
+
+# https://www.reddit.com/r/vim/comments/2se5zq/vim_for_java_and_android_developers/
+function newp() {
+  mkdir -p "$@" && cd "$@"
+  gradle init --type java-library
+  perl -i -lne 'print $_;print "apply plugin: \x27eclipse\x27" if(/apply/);' build.gradle
+  # gradle eclipse
+  ./gradlew eclipse
+  rm -fr src/main/java/Library.java
+  rm -fr src/test/java/LibraryTest.java
+}
+
 ###-begin-npm-completion-###
 #
 # npm command completion script

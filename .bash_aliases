@@ -14,10 +14,15 @@ alias vim-raw="vim -u NORC"
 alias vim-golf="vim -u $HOME/.vim/vimgolf.vimrc"
 alias ack="ag"
 
+alias jq='jq -S'
+
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
 alias lsd="ls -la --color | grep '^d'"
+
+# Elixir repl with the current project (mix.exs)
+alias miex='iex -S mix'
 
 alias ..="cd .."
 alias ...="cd ../.."
@@ -31,6 +36,7 @@ alias perlcritic5='perlcritic -verbose 5'
 alias perlcritic8='perlcritic -verbose 8'
 
 alias c='pygmentize -O style=solarizeddark -f console256 -g'
+# alias c='pygmentize -O style=vim -f console256 -g'
 
 alias now='perl -M5.010 -e "say time"'
 
@@ -42,7 +48,7 @@ alias npm-outdated-update="npm outdated --json --depth=0 | jq --ascii-output --m
 
 ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
 
-alias update='sudo pacman -Syu; sudo npm update npm@latest -g; sudo npm update -g; gem list `gem list | cut -d " " -f 1`'
+alias update='sudo pacman -S archlinux-keyring; sudo pacman -Syyu; npm update -g'
 
 function d {
   if [[ $# > 0 ]]; then

@@ -5,7 +5,11 @@ ${0:${VISUAL:#code here}}
 endsnippet
 
 snippet r "require"
-var $1 = require('${0:$1}');
+const $1 = require('${0:$1}');
+endsnippet
+
+snippet rt "require test"
+const expect = require('chai').expect;
 endsnippet
 
 snippet () "IIFE"
@@ -14,10 +18,6 @@ snippet () "IIFE"
 
 	${0:${VISUAL:#code here}}
 })();
-endsnippet
-
-snippet str "stringify"
-JSON.stringify(${1:${VISUAL:#var}}, null, 4)$0
 endsnippet
 
 snippet d "dump"
@@ -176,12 +176,6 @@ function ${1:function_name}(${2:argument}) {
 }
 endsnippet
 
-snippet fn "function (fn)"
-function ${1:function_name}(${2:argument}) {
-	${VISUAL}$0
-}
-endsnippet
-
 snippet iife "Immediately-Invoked Function Expression (iife)"
 (function (${1:argument}) {
 	${VISUAL}$0
@@ -306,6 +300,22 @@ endsnippet
 
 snippet le "$log.error()"
 $log.error(${VISUAL}$0);
+endsnippet
+
+# Test mocha + chai
+
+snippet des "mocha describe"
+describe('$1', () => {
+
+  ${VISUAL}$0
+
+});
+endsnippet
+
+snippet it "mocha it"
+  it('$1', () => {
+    ${VISUAL}$0
+  });
 endsnippet
 
 # vim:ft=snippets:

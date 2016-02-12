@@ -1,4 +1,4 @@
-colorscheme jellybeans
+" colorscheme jellybeans
 
 set guioptions-=m " Removes menu
 set guioptions-=T " Removes top toolbar

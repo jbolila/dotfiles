@@ -1,72 +1,19 @@
-set nocompatible              " be iMproved
-filetype off                  " required!
+set encoding=utf-8 nobomb
+scriptencoding utf-8
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+if &compatible | set nocompatible | endif
 
-Plugin 'gmarik/Vundle.vim'
+" no beeps or flashes
+set visualbell t_vb=
+set ttyfast
+set lazyredraw                        " macros don't update display
 
-Plugin 'scrooloose/syntastic'
-
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'nanotech/jellybeans.vim'
-" Plugin 'altercation/vim-colors-solarized'
-
-Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/ctrlp.vim'
-
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-
-Plugin 'vim-scripts/UltiSnips'
-
-Plugin 'editorconfig/editorconfig-vim'
-
-Plugin 'reedes/vim-litecorrect'
-Plugin 'reedes/vim-wordy'
-
-Plugin 'einars/js-beautify'
-Plugin 'maksimr/vim-jsbeautify'
-Plugin 'elzr/vim-json'
-Plugin 'pangloss/vim-javascript'
-
-Plugin 'mattn/emmet-vim'
-Plugin 'godlygeek/tabular'
-
-Plugin 'mhinz/vim-signify'
-Plugin 'rking/ag.vim'
-
-Plugin 'vim-scripts/argtextobj.vim'
-Plugin 'michaeljsmith/vim-indent-object'
-
-" Rust
-" Plugin 'rust-lang/rust.vim'
-" Plugin 'cespare/vim-toml'
-" Plugin 'phildawes/racer'
-
-if executable('ctags')
-  Bundle 'majutsushi/tagbar'
-endif
-
-call vundle#end()
-
-let $GIT_SSL_NO_VERIFY = 'true' " required in the corporate network
+set title                             " wintitle = filename - vim
 
 filetype plugin indent on
 syntax enable
 
-set encoding=utf8
 set t_Co=256
-" let g:solarized_termcolors=256
-
-set background=light
-colorscheme PaperColor
-" colorscheme jellybeans
-" colorscheme solarized
 
 set number
 set relativenumber
@@ -81,11 +28,30 @@ set expandtab
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 
-set autoindent
+set nowrap
+set nojoinspaces                      " J command doesn't add extra space
+
+set autoindent                        " indent when creating newline
+set smartindent                       " add an indent level inside braces
+set cindent                           " testing cindent...
+
+" for autoindent, use same spaces/tabs mix as previous line, even if
+" tabs/spaces are mixed. Helps for docblock, where the block comments have a
+" space after the indent to align asterisks
+set copyindent
+
+" Try not to change the indent structure on "<<" and ">>" commands. I.e. keep
+" block comments aligned with space if there is a space there.
+set preserveindent
+
+
 set backspace=indent,eol,start
 
 set ttimeout
 set ttimeoutlen=50
+
+" gVim copy to clipboard (used by firefox) instead of primary
+set clipboard=unnamedplus
 
 set incsearch
 set hlsearch                 " highlight search
@@ -94,6 +60,9 @@ set mat=2                    " matching time in secs
 
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
+
+" autocd to the file open on the current buffer
+autocmd BufEnter * silent! lcd %:p:h
 
 nnoremap <leader>v <C-w>v<C-w>l
 nnoremap <leader>s <C-w>s
@@ -113,14 +82,10 @@ noremap   <Down>   <NOP>
 noremap   <Left>   <NOP>
 noremap   <Right>  <NOP>
 
-nnoremap ;; m`A;<Esc>``
-
-" paste
-xnoremap <leader>p "_dP
-
 set cursorline
+set cursorcolumn
 " highlight Search ctermbg=black ctermfg=yellow cterm=underline
-let &colorcolumn=join(range(81,255),',')
+let &colorcolumn=join(range(101,255),',')
 set list listchars=tab:→\ ,trail:·
 highlight Whitespace cterm=underline gui=underline ctermbg=NONE guibg=NONE ctermfg=lightred guifg=lightred
 autocmd ColorScheme * highlight Whitespace gui=underline ctermbg=NONE guibg=NONE ctermfg=lightred guifg=lightred
@@ -133,45 +98,27 @@ autocmd BufWritePre * :%s/\s\+$//e
 noremap <C-z> :update<CR>
 vnoremap <C-z> <C-C>:update<CR>
 
-" tabs (:h tabpage)
-set tabpagemax=15
-
 " Set region to British English
 set spelllang=en_gb
 
 " Toggle spell checking on and off with `,s`
 nmap <silent> <leader>s :set spell!<CR>
 
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=white ctermbg=blue
-
-autocmd FileType gitcommit setlocal spell
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-" vimcast #14 edit (open from the current file folder)
-cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
-map <leader>et :tabe %%
-
-" Copy to X CLIPBOARD
-map <leader>cc :w !xsel -i -b<CR>
-map <leader>cp :w !xsel -i -p<CR>
-map <leader>cs :w !xsel -i -s<CR>
-" Paste from X CLIPBOARD
-map <leader>pp :r!xsel -p<CR>
-map <leader>ps :r!xsel -s<CR>
-map <leader>pb :r!xsel -b<CR>
+hi SpellBad cterm=underline,bold
 
 " recover more
 set updatecount=10
 set swapsync=fsync
 
 " easy moving code blocks
-vnoremap < <gv
-vnoremap > >gv
+vnoremap < <gv " better identation
+vnoremap > >gv " better identation
 
+" easy moving code blocks
+vnoremap < <gv " better identation
+vnoremap > >gv " better identation
+
+" Folde
 set nofoldenable      " don't fold by default
 set foldmethod=syntax
 set foldlevel=9
@@ -179,63 +126,39 @@ noremap <Space> za
 noremap <Leader>F zR
 noremap <Leader>f zM
 
-" Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-
-" completion:
-set path=**
-set complete-=i
-
-set hidden " allow switch buffer even was modified and not saved
-
-" dir completion <S-Tab>
-set wildmenu
-set wildmode=longest:full,list:full
 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:aghighlight=1
 
-" " Plugin configuration:
+" tern
+set omnifunc=syntaxcomplete#Complete
+let g:tern_map_keys=1
+" let g:tern_show_argument_hints="on_hold"
+let g:tern_show_argument_hints = 'on_move'
 
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEditSplit = "vertical"
-let g:UltiSnipsSnippetsDir = '~/.vim/mysnippets/'
-let g:UltiSnipsSnippetDirectories = ['mysnippets']
+let g:used_javascript_libs = 'underscore,jasmine'
 
 set laststatus=2
 let g:lightline = {
+  \ 'colorscheme': 'PaperColor',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+  \ },
   \ 'component': {
   \   'lineinfo': ' %3l:%-2v',
+  \   'readonly': '%{&filetype=="help"?"":&readonly?"":""}',
+  \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+  \   'fugitive': '%{exists("*fugitive#head")?" ".fugitive#head():""}'
   \ },
-  \ 'component_function': {
-  \   'readonly': 'MyReadonly',
-  \   'fugitive': 'MyFugitive'
+  \ 'component_visible_condition': {
+  \   'readonly': '(&filetype!="help"&& &readonly)',
+  \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+  \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
   \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
   \ }
-
-function! MyReadonly()
-  return &readonly ? '' : ''
-endfunction
-
-function! MyFugitive()
-  if exists('*fugitive#head')
-    let _ = fugitive#head()
-    return strlen(_) ? ''._ : ''
-  endif
-  return ''
-endfunction
 
 map <leader>n :NERDTreeToggle<CR>
 map <leader>r :NERDTreeCWD<CR>
@@ -244,27 +167,11 @@ let g:NERDTreeWinSize=40
 let g:NERDTreeWinPos="right"
 let g:bufExplorerUseCurrentWindow=1
 let g:NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$']
-autocmd vimenter * if !argc() | NERDTree | endif
+" autocmd vimenter * if !argc() | NERDTree | endif
 
-nnoremap <leader>b :CtrlPBuffer<CR>    " CtrlP on buffers
-nnoremap <leader>. :CtrlPTag<CR>    " ctags integration
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-" exclude
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*
-" set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/lib/* " Evel!!
-" breaks the vim-jsbeautify plugin!
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(pyc|so|swp)$',
-  \ }
-
-
-" Notes (pandoc)
-nmap <leader>vv :!pandoc -t html5 -T 'Pandoc Generated - "%"' --smart --standalone --self-contained --table-of-contents --data-dir %:p:h -c ~/.dotfiles/css/github-pandoc.css "%" \|bcat<cr><cr>
-
-" Programming!
+" ========================================================================
+" Syntastic
+" ========================================================================
 
 let g:syntastic_check_on_open = 1
 " let g:syntastic_quiet_warnings = 0
@@ -275,7 +182,15 @@ let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_perl_checker = 1
 let g:syntastic_perl_perlcritic_thres = 3
 
-" au FileType javascript call JavaScriptFold()
+" let g:syntastic_enable_elixir_checker = 1
+" let g:syntastic_elixir_checkers = ['credo']
+
+" // https://github.com/kurko/smartest.vim
+" autocmd FileType elixir map <leader>t :! mix test  --no-color<CR>
+autocmd FileType elixir map <leader>t :call RunTestFile()<cr>
+autocmd FileType elixir map <leader>r :call RunNearestTest()<cr>
+
+autocmd FileType javascript map <leader>t :! npm test -- %<CR>
 
 " eslint on radar!
 let g:syntastic_javascript_checkers = ['eslint']
@@ -286,8 +201,8 @@ autocmd FileType javascript noremap <buffer> _t :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> _t :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> _t :call CSSBeautify()<cr>
 
-autocmd BufNewFile,BufRead *.c set formatprg=astyle\ --style=linux
-autocmd BufNewFile,BufRead *.h set formatprg=astyle\ --style=linux
+" let g:tern_show_argument_hints="on_hold"
+let g:tern_show_argument_hints = 'on_move'
 
 " relay on max_line_length (in the .editorconfig file)
 let g:EditorConfig_max_line_indicator = "fill"
@@ -303,6 +218,9 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 " for Gdiff opens a new tab and diffs the file in the active window against
 " common ancestor (:tabclose to close the tab).
 nnoremap <leader>ga :tab sp \| Gvedit :1 \| windo diffthis<CR>
+
+" Java
+au FileType java setlocal copyindent preserveindent sts=0 sw=4 ts=4
 
 
 let perl_include_pod=1
@@ -333,44 +251,108 @@ let perl_fold=1
 " pjcj/vim-hl-var
 " let g:hlvarhl="ctermbg=black ctermfg=red guifg=#ff0000 guibg=#000000 gui=bold"
 
-" " Rust.lang
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsEditSplit = "vertical"
+let g:UltiSnipsSnippetsDir = '~/.vim/mysnippets/'
+let g:UltiSnipsSnippetDirectories = ['mysnippets']
 
-" " tagbar
-" let g:tagbar_type_rust = {
-"     \ 'ctagstype' : 'rust',
-"     \ 'kinds' : [
-"         \'T:types,type definitions',
-"         \'f:functions,function definitions',
-"         \'g:enum,enumeration names',
-"         \'s:structure names',
-"         \'m:modules,module names',
-"         \'c:consts,static constants',
-"         \'t:traits,traits',
-"         \'i:impls,trait implementations',
-"     \]
-"     \}
 
-" " let g:racer_cmd = "/Users/jbolila/local/bin/racer"
-" " let $RUST_SRC_PATH="/home/jbolila/local/rustc-1.1.0/src/"
+let $GIT_SSL_NO_VERIFY = 'true' " required in the corporate network
 
-" augroup litecorrect
-"   autocmd!
-"   autocmd FileType markdown,mkd call litecorrect#init()
-"   autocmd FileType textile call litecorrect#init()
-" augroup END
 
-" from http://vim.wikia.com/wiki/Insert_current_date_or_time
-" If buffer modified, update any 'Last modified: ' in the first 20 lines.
-" 'Last modified: ' can have up to 10 characters before (they are retained).
-" Restores cursor and window position using save_cursor variable.
-function! LastModified()
-  if &modified
-    let save_cursor = getpos(".")
-    let n = min([20, line("$")])
-    keepjumps exe '1,' . n . 's#^\(.\{,10}Last modified: \).*#\1' .
-          \ strftime('%a %b %d, %Y  %I:%M%p') . '#e'
-    call histdel('search', -1)
-    call setpos('.', save_cursor)
-  endif
-endfun
-autocmd BufWritePre * call LastModified()
+" ========================================================================
+" Plugins:  https://github.com/junegunn/vim-plug
+" ========================================================================
+
+call plug#begin()
+
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'itchyny/lightline.vim'
+
+Plug 'scrooloose/syntastic'
+
+Plug 'vim-scripts/argtextobj.vim'
+Plug 'michaeljsmith/vim-indent-object'
+
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'vim-scripts/ctrlp.vim'
+
+
+Plug 'mhinz/vim-signify'
+Plug 'rking/ag.vim'
+
+Plug 'vim-scripts/UltiSnips'
+
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+
+" Plug 'suan/vim-instant-markdown', {
+"       \   'do': 'npm install -g instant-markdown-d'
+"       \ }
+
+" ========================================================================
+" Language: YAML
+" ========================================================================
+
+Plug 'ingydotnet/yaml-vim'
+
+" ========================================================================
+" Language: Elixir
+" ========================================================================
+
+Plug 'elixir-lang/vim-elixir'
+Plug 'kurko/smartest.vim'
+
+" Hit :EX and vim will prompt you to include the path of your new module
+" for shopping/cart will generate two files: lib/shopping/cart.ex and test/shopping/cart_test.exs
+Plug 'jadercorrea/elixir_generator.vim'
+
+Plug 'vim-erlang/vim-erlang-omnicomplete'
+Plug 'vim-erlang/vim-erlang-runtime'
+
+" ========================================================================
+" Language: Javascript
+" ========================================================================
+
+Plug 'othree/yajs.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
+
+" Plug 'moll/vim-node' " gf
+" Plug 'einars/js-beautify'
+Plug 'maksimr/vim-jsbeautify', {
+  \ 'do': 'git submodule update --init --recursive'
+  \ }
+
+Plug 'editorconfig/editorconfig-vim'
+
+Plug 'elzr/vim-json'
+
+Plug 'junegunn/vim-easy-align'
+Plug 'ervandew/supertab'
+
+Plug 'elmcast/elm-vim'
+
+
+call plug#end()
+
+" settings depending of plugins:
+
+set background=light
+colorscheme PaperColor
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+let g:SuperTabDefaultCompletionType = 'context'
+
+" Run Checkstyle on open/write
+autocmd BufWinEnter *.java :Checkstyle
+autocmd BufWritePost *.java :Checkstyle
+
+" https://github.com/avh4/elm-format
+" let g:elm_format_autosave = 1
