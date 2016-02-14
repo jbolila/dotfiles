@@ -138,6 +138,24 @@ let g:tern_show_argument_hints = 'on_move'
 
 let g:used_javascript_libs = 'underscore,jasmine'
 
+" Highlight fenced code blocks in markdown docs
+let g:markdown_fenced_languages = [
+      \'clojure',
+      \'css',
+      \'elixir',
+      \'haskell',
+      \'html',
+      \'javascript',
+      \'js=javascript',
+      \'json=javascript',
+      \'python',
+      \'ruby',
+      \'sass',
+      \'scheme',
+      \'sh',
+      \'bash',
+      \'xml'
+      \]
 set laststatus=2
 let g:lightline = {
   \ 'colorscheme': 'PaperColor',
@@ -201,6 +219,9 @@ autocmd FileType javascript noremap <buffer> _t :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> _t :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> _t :call CSSBeautify()<cr>
 
+" Elm
+autocmd FileType elm noremap <buffer> _t :ElmFormat<cr>
+
 " let g:tern_show_argument_hints="on_hold"
 let g:tern_show_argument_hints = 'on_move'
 
@@ -220,7 +241,8 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 nnoremap <leader>ga :tab sp \| Gvedit :1 \| windo diffthis<CR>
 
 " Java
-au FileType java setlocal copyindent preserveindent sts=0 sw=4 ts=4
+autocmd FileType * if &ft != 'java' | let b:SuperTabDisabled = 1 | endif
+au FileType java setlocal copyindent preserveindent sts=0 sw=4 ts=4 textwidth=100
 
 
 let perl_include_pod=1
@@ -288,7 +310,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
+
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Plug 'suan/vim-instant-markdown', {
 "       \   'do': 'npm install -g instant-markdown-d'
@@ -304,8 +329,11 @@ Plug 'ingydotnet/yaml-vim'
 " Language: Elixir
 " ========================================================================
 
-Plug 'elixir-lang/vim-elixir'
+Plug 'elixir-lang/vim-elixir', { 'for': ['elixir', 'markdown'] }
 Plug 'kurko/smartest.vim'
+
+" https://github.com/rgrinberg/mix_ctags
+Plug 'majutsushi/tagbar', { 'for': ['elixir'], 'on': 'TagbarOpenAutoClose' }
 
 " Hit :EX and vim will prompt you to include the path of your new module
 " for shopping/cart will generate two files: lib/shopping/cart.ex and test/shopping/cart_test.exs
@@ -355,4 +383,16 @@ autocmd BufWinEnter *.java :Checkstyle
 autocmd BufWritePost *.java :Checkstyle
 
 " https://github.com/avh4/elm-format
-" let g:elm_format_autosave = 1
+let g:elm_format_autosave = 0
+
+" search operators {{{
+map g/ <Plug>(operator-ag)
+map gw <Plug>(operator-ag-word)
+map gh <Plug>(operator-dash)
+
+nnoremap <silent> <leader>k :Dash<CR>
+
+nnoremap <Leader>aa :Ag!<space>
+nnoremap <Leader>aw :Ag! -w<space>
+nnoremap <Leader>aq :Ag -Q<space>
+nnoremap <Leader>as :Ag ''<left>
